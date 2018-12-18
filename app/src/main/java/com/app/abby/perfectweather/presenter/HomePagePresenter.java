@@ -10,7 +10,6 @@ import java.lang.ref.WeakReference;
 import rx.Subscriber;
 import rx.Subscription;
 
-
 /**
  * Created by Abby on 8/14/2017.
  */
@@ -18,7 +17,7 @@ public class HomePagePresenter implements HomePageContract.Presenter{
 
     private WeakReference<HomePageContract.View> mWeakView;
     private Subscription subscription;
-     public HomePagePresenter(HomePageContract.View view){
+    public HomePagePresenter(HomePageContract.View view){
         mWeakView=new WeakReference<>(view);
         view.setPresenter(this);
     }
@@ -27,8 +26,6 @@ public class HomePagePresenter implements HomePageContract.Presenter{
     public void loadWeather(String city,boolean needToast){
 
         if(Util.isNetworkConnected(WeatherApplication.getAppContext())){
-
-
              subscription = ApiClient.getInstance().fetchWeather(city).doOnRequest(aLong -> {
                  if(needToast)
                  mWeakView.get().toastLoading();
@@ -51,11 +48,8 @@ public class HomePagePresenter implements HomePageContract.Presenter{
 
                 }
             });
-
-
         }
     }
-
 
     @Override
     public void onsubscribe(String city){
@@ -70,18 +64,12 @@ public class HomePagePresenter implements HomePageContract.Presenter{
             subscription.unsubscribe();
         }
 
-
     }
 
     @Override
     public WeakReference<android.view.View> getView(){
         return mWeakView.get().provideView();
     }
-
-
-
-
-
 }
 
 

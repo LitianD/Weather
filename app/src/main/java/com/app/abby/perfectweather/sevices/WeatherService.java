@@ -118,7 +118,4 @@ public class WeatherService extends Service {
             mTimesubscription.unsubscribe();
         }
     }
-
-
-
 }

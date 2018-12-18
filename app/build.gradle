@@ -15,7 +15,7 @@ android {
     defaultConfig {
         multiDexEnabled false
         applicationId "com.app.abby.perfectweather"
-        minSdkVersion 18
+        minSdkVersion 23
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -30,7 +30,7 @@ android {
 
     }
 
-    compileOptions{
+    compileOptions {
 
     }
 }
@@ -77,6 +77,7 @@ dependencies {
 
     //butterknife
     compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
     //pinyin
@@ -84,7 +85,6 @@ dependencies {
 
     //compile 'com.android.support:support-annotations:25.3.1'
     compile 'org.glassfish.main.javaee-api:javax.annotation:3.1.2.2'
-
 
 
 }

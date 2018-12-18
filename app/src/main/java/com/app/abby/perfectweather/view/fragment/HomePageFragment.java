@@ -233,7 +233,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
         return lifeIndex;
     }
 
-
     @Override
     public void toastLoading(){
         TSnackbar.make(getView(),"(＝^ω^＝)正在加载天气，请稍候...",TSnackbar.LENGTH_INDEFINITE)
@@ -262,8 +261,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
                     });
                 tSnackbar.show();
     }
-
-
 
     public void showNotificationbar(WeatherBean weather){
 

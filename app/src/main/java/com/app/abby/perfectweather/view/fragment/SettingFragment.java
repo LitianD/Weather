@@ -73,13 +73,4 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         }
         return true;
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-
-    }
-
-
 }
