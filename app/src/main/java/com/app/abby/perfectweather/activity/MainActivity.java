@@ -14,7 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.amap.api.location.AMapLocationClient;
@@ -73,6 +75,9 @@ public class MainActivity extends BaseActivity implements
     @BindView(R.id.refresh_layout)
     RefreshLayout refreshLayout;
 
+    @BindView(R.id.header)
+    RelativeLayout header_layout;
+
     private AMapLocationClientOption mOtion;
     private AMapLocationClient mClient;
     DrawerPresenter drawerpresenter;
@@ -90,27 +95,27 @@ public class MainActivity extends BaseActivity implements
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//init BottomNavigationView
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_home);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         this.fragmentId = R.id.navigation_home;
 
         unbinder = ButterKnife.bind(this);
-
+//initToolBar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-
+//init Drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
+//initReference
         refreshLayout.setOnRefreshListener(refreshlayout -> {
             pagePresenter.loadWeather(SharedPreferenceUtil.getInstance().getCity(), false);
             refreshlayout.finishRefresh();
         });
-
+//InitPageFragement
         homePageFragment = HomePageFragment.newInstance();//获得首页对象
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homePageFragment).commit();
         //Util.addFragmentToActivity(getSupportFragmentManager(), homePageFragment, R.id.fragment_container);
@@ -130,16 +135,19 @@ public class MainActivity extends BaseActivity implements
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    header_layout.setVisibility(View.VISIBLE);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homePageFragment).commit();
                     pagePresenter.loadWeather(cityName, false);
                     fragmentId = R.id.navigation_home;
                     return true;
                 case R.id.navigation_dashboard:
+                    //header_layout.setVisibility(View.GONE);
                     MainActivity.this.blankFragment = BlankFragment.newInstance("", "");
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment).commit();
                     fragmentId = R.id.navigation_dashboard;
                     return true;
                 case R.id.navigation_notifications:
+                    //header_layout.setVisibility(View.GONE);
                     MainActivity.this.blankFragment2 = BlankFragment2.newInstance("", "");
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment2).commit();
                     fragmentId = R.id.navigation_notifications;

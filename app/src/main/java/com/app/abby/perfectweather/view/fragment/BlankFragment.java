@@ -4,11 +4,22 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.app.abby.perfectweather.R;
+import com.app.abby.perfectweather.activity.MainActivity;
+import com.app.abby.perfectweather.view.adapter.FriendsCircleAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindArray;
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +35,10 @@ public class BlankFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    @BindView(R.id.friends_circle)
+    RecyclerView friends_circle;
+
+    private FriendsCircleAdapter adapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -61,11 +76,32 @@ public class BlankFragment extends Fragment {
         }
     }
 
+    public void initRecycleLayout(View view){
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(3);
+        list.add(3);
+        list.add(3);
+        list.add(3);
+        list.add(3);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        friends_circle = (RecyclerView)view.findViewById(R.id.friends_circle);
+        friends_circle.setLayoutManager(linearLayoutManager);
+        adapter = new FriendsCircleAdapter(list);
+        friends_circle.setAdapter(adapter);
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        initRecycleLayout(view);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

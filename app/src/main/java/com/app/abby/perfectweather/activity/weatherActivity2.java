@@ -225,15 +225,3 @@ public class weatherActivity2 extends BaseActivity implements
         drawerpresenter=new DrawerPresenter(drawerFragment);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
