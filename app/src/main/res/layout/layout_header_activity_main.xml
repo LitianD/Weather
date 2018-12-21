@@ -32,7 +32,7 @@
                 tools:context=".activity.MainActivity">
 
                 <RelativeLayout
-                    android:background="@drawable/bg_header"
+                    android:background="@drawable/head"
                     android:id="@+id/header"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
