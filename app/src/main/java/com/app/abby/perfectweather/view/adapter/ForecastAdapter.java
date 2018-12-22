@@ -1,6 +1,5 @@
 package com.app.abby.perfectweather.view.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.abby.perfectweather.R;
-import com.app.abby.perfectweather.base.BaseRecyclerViewAdapter;
 import com.app.abby.perfectweather.base.BaseViewHolder;
-import com.app.abby.perfectweather.model.api.WeatherBean;
 import com.app.abby.perfectweather.model.database.ForecastORM;
-import com.app.abby.perfectweather.util.Util;
 
 import java.util.List;
 

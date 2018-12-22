@@ -2,10 +2,6 @@ package com.app.abby.perfectweather.model.api;
 
 import java.util.List;
 
-/**
- * Created by Abby on 8/17/2017.
- */
-
 public class WeatherBean {
 
 
@@ -477,8 +473,6 @@ public class WeatherBean {
         }
 
         public static class DailyForecastBean {
-
-
             private AstroBean astro;
             private CondBeanX cond;
             private String date;

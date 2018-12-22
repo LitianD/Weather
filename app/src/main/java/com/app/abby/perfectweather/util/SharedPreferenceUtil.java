@@ -6,9 +6,6 @@ import android.content.SharedPreferences;
 
 import com.app.abby.perfectweather.base.WeatherApplication;
 
-/**
- * Created by Abby on 8/14/2017.
- */
 
 public  class SharedPreferenceUtil  {
 

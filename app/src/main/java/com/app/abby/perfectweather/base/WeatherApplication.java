@@ -3,11 +3,6 @@ package com.app.abby.perfectweather.base;
 import android.app.Application;
 import android.content.Context;
 
-
-/**
- * Created by Abby on 8/13/2017.
- */
-
 public class WeatherApplication extends Application {
 
 

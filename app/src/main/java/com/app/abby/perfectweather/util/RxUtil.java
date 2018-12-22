@@ -5,10 +5,6 @@ import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * Created by Abby on 8/14/2017.
- */
-
 public class RxUtil {
 
     public static <T> Observable.Transformer<T, T> rxSchedulerHelper() {

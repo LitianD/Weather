@@ -18,10 +18,6 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 
-/**
- * Created by Abby on 9/2/2017.
- */
-
 public class WeatherService extends Service {
 
     private   Notification notification;

@@ -19,10 +19,6 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by Abby on 8/13/2017.
- */
-
 public class Util {
 
 
@@ -106,22 +102,6 @@ public class Util {
                 break;
         }
         return week;
-    }
-
-    public static void ToastShortTime(String s){
-        Toast toast=Toast.makeText(WeatherApplication.getAppContext(),s,Toast.LENGTH_SHORT);
-        toast.show();
-        Timer timer=new Timer();
-        TimerTask timerTask=new TimerTask() {
-            @Override
-            public void run() {
-                toast.cancel();
-
-            }
-        };
-        timer.schedule(timerTask,500);
-        timer.cancel();
-        timerTask.cancel();
     }
 
 }

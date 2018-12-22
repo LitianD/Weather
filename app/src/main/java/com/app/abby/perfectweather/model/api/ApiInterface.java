@@ -4,9 +4,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 
-/**
- * Created by Abby on 8/13/2017.
- */
 
 public interface ApiInterface {
 

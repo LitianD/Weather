@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,14 +19,12 @@ import android.view.ViewGroup;
 
 import com.app.abby.perfectweather.R;
 import com.app.abby.perfectweather.activity.MainActivity;
-import com.app.abby.perfectweather.base.BaseFragment;
 import com.app.abby.perfectweather.base.WeatherApplication;
-import com.app.abby.perfectweather.contract.HomePageContract;
+import com.app.abby.perfectweather.model.api.ApiClient;
 import com.app.abby.perfectweather.model.api.WeatherBean;
 import com.app.abby.perfectweather.model.database.DetailORM;
 import com.app.abby.perfectweather.model.database.ForecastORM;
 import com.app.abby.perfectweather.model.database.LifeIndexOrm;
-import com.app.abby.perfectweather.model.database.OrmLite;
 import com.app.abby.perfectweather.util.SharedPreferenceUtil;
 import com.app.abby.perfectweather.util.Util;
 import com.app.abby.perfectweather.view.adapter.DetailAdapter;
@@ -39,66 +38,50 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import rx.Subscriber;
 
-
-/**
- * Created by Abby on 8/13/2017.
- */
-
-public class HomePageFragment extends BaseFragment implements HomePageContract.View {
+public class HomePageFragment extends Fragment {
 
     private Unbinder unbinder;
-    @BindView(R.id.detail_recyclerview)
+    //三个RecyclerView
     RecyclerView detailRecy;
-
-    @BindView(R.id.forecast_recyclerview)
     RecyclerView forecastRecy;
-
-    @BindView(R.id.lifeindex_recyclerview)
     RecyclerView lifeRecy;
-
-
+    //三个RecyclerView对应的适配器
     private DetailAdapter detailAdapter;
     private ForecastAdapter forecastAdapter;
     private LifeIndexAdapter lifeIndexAdapter;
-
-
+    //三个RecyclerView对应的数据列表
     private List<DetailORM> detailORMs;
     private List<ForecastORM> forecastORMs;
     private List<LifeIndexOrm> lifeIndexOrms;
 
-
-    private HomePageContract.Presenter presenter;
-
     private OnFragmentInteractionListener onFragmentInteractionListener;
-
+    //顶部状态栏用于显示加载状态
     private TSnackbar tSnackbar;
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_homepage, container, false);
         unbinder=ButterKnife.bind(this,rootView);
 
-
+        detailRecy = (RecyclerView)rootView.findViewById(R.id.detail_recyclerview);
         detailRecy.setNestedScrollingEnabled(false);
         detailRecy.setLayoutManager(new GridLayoutManager(WeatherApplication.getAppContext(), 3));
         detailORMs=new ArrayList<>();
         detailAdapter=new DetailAdapter(detailORMs);
         detailRecy.setAdapter(detailAdapter);
 
-
-
+        forecastRecy = (RecyclerView)rootView.findViewById(R.id.forecast_recyclerview) ;
         forecastRecy.setNestedScrollingEnabled(false);
         forecastRecy.setLayoutManager(new LinearLayoutManager(WeatherApplication.getAppContext()));
         forecastORMs=new ArrayList<>();
         forecastAdapter=new ForecastAdapter(forecastORMs);
         forecastRecy.setAdapter(forecastAdapter);
 
-
+        lifeRecy = (RecyclerView)rootView.findViewById(R.id.lifeindex_recyclerview) ;
         lifeRecy.setNestedScrollingEnabled(false);
         lifeRecy.setLayoutManager(new LinearLayoutManager(WeatherApplication.getAppContext()));
         lifeIndexOrms=new ArrayList<>();
@@ -108,8 +91,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
         return rootView;
     }
 
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
@@ -125,13 +106,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
     }
 
 
-    @Override
-    public void setPresenter(HomePageContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-
-    @Override
     public void showWeather(WeatherBean weather) {
 
 
@@ -154,41 +128,10 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 
     }
 
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-        if(presenter!=null)
-        presenter.onunsubscribe();
-        //释放资源
-        tSnackbar=null;
-
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
     public interface OnFragmentInteractionListener {
         void updateHeader(WeatherBean weather);
     }
 
-
-    @Override
-    protected void lazyload(){
-
-    }
-
-    @Override
     public WeakReference<View> provideView(){
 
         return new WeakReference<>(getView());
@@ -233,34 +176,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
         return lifeIndex;
     }
 
-    @Override
-    public void toastLoading(){
-        TSnackbar.make(getView(),"(＝^ω^＝)正在加载天气，请稍候...",TSnackbar.LENGTH_INDEFINITE)
-                .setFadeOrTranslateStyle(TSnackbar.STYLE_FADE_OUT)
-                .setActionTextColor(Color.WHITE)
-                .setPreDefinedStyle(TSnackbar.STYLE_LOADING)
-               .show();
-    }
-
-    @Override
-    public void toastError(){
-        TSnackbar.make(getView(),"（╯＾╰）无法加载当前城市的天气，请重试...",TSnackbar.LENGTH_LONG)
-                .setFadeOrTranslateStyle(TSnackbar.STYLE_FADE_OUT)
-                .setPreDefinedStyle(TSnackbar.STYLE_ERROR)
-                .show();
-    }
-
-    @Override
-    public void toastComplete(){
-
-             tSnackbar=TSnackbar.make(getView(),"加载完毕~(@^_^@)~",TSnackbar.LENGTH_LONG)
-                    .setPreDefinedStyle(TSnackbar.STYLE_COMPLETE)
-                    .setFadeOrTranslateStyle(TSnackbar.STYLE_FADE_OUT)
-                    .setAction("取消", v -> {
-                        tSnackbar.dismiss();
-                    });
-                tSnackbar.show();
-    }
 
     public void showNotificationbar(WeatherBean weather){
 
@@ -283,10 +198,51 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
             manager.notify(1, notification);
 
         }
-
     }
 
+    public void loadWeather(String city,boolean needToast){
 
+        if(Util.isNetworkConnected(WeatherApplication.getAppContext())){
+            ApiClient.getInstance().fetchWeather(city).doOnRequest(aLong -> {
+                if(needToast) {
+                    TSnackbar.make(getView(), "正在加载天气，请稍候...", TSnackbar.LENGTH_INDEFINITE)
+                            .setFadeOrTranslateStyle(TSnackbar.STYLE_FADE_OUT)
+                            .setActionTextColor(Color.WHITE)
+                            .setPreDefinedStyle(TSnackbar.STYLE_LOADING)
+                            .show();
+                }
+            }).subscribe(new Subscriber<WeatherBean>() {
+                @Override
+                public void onCompleted() {
+                    if(needToast){
+                        tSnackbar=TSnackbar.make(getView(),"加载完毕",TSnackbar.LENGTH_LONG)
+                                .setPreDefinedStyle(TSnackbar.STYLE_COMPLETE)
+                                .setFadeOrTranslateStyle(TSnackbar.STYLE_FADE_OUT)
+                                .setAction("取消", v -> {
+                                    tSnackbar.dismiss();
+                                });
+                        tSnackbar.show();
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    if(needToast){
+                        TSnackbar.make(getView(),"无法加载当前城市的天气，请重试...",TSnackbar.LENGTH_LONG)
+                                .setFadeOrTranslateStyle(TSnackbar.STYLE_FADE_OUT)
+                                .setPreDefinedStyle(TSnackbar.STYLE_ERROR)
+                                .show();
+                    }
+                }
+
+                @Override
+                public void onNext(WeatherBean weather) {
+                    showWeather(weather);
+
+                }
+            });
+        }
+    }
 }
 
 

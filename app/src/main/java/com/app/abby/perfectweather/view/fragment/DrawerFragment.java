@@ -1,13 +1,9 @@
 package com.app.abby.perfectweather.view.fragment;
 
-import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.abby.perfectweather.R;
 import com.app.abby.perfectweather.activity.SelectCityActivity;
-import com.app.abby.perfectweather.base.BaseFragment;
-import com.app.abby.perfectweather.base.WeatherApplication;
-import com.app.abby.perfectweather.contract.DrawerContract;
 import com.app.abby.perfectweather.model.api.ApiClient;
 import com.app.abby.perfectweather.model.api.WeatherBean;
 import com.app.abby.perfectweather.model.database.DrawerItemORM;
@@ -32,43 +23,27 @@ import com.app.abby.perfectweather.view.adapter.DrawerItemAdapter;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.WhereBuilder;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import rx.Subscriber;
 import rx.Subscription;
 
+public class DrawerFragment extends Fragment {
 
-/**
- * Created by Abby on 8/29/2017.
- */
-
-public class DrawerFragment extends BaseFragment implements DrawerContract.View {
-
-    private DrawerContract.Presenter mPrsenter;
     private Unbinder unbinder;
     private OnDrawerItemClick onDrawerItemClick;
     private Subscription subscription;
     public DrawerFragment() {
-
     }
 
-
-    @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
 
-
-    @BindView(R.id.drawer_item)
     RecyclerView mDrawerRecy;
-
-    @BindView(R.id.add_city_btn)
     Button add_btn;
 
     private DrawerItemAdapter mDraweritemAdapter;
@@ -80,7 +55,7 @@ public class DrawerFragment extends BaseFragment implements DrawerContract.View 
         View view = inflater.inflate(R.layout.fragment_drawer, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-
+        mDrawerRecy = (RecyclerView)view.findViewById(R.id.drawer_item) ;
         mDrawerRecy.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mDraweritemList = new ArrayList<>();
         mDraweritemAdapter = new DrawerItemAdapter(mDraweritemList);
@@ -103,7 +78,6 @@ public class DrawerFragment extends BaseFragment implements DrawerContract.View 
 
                             @Override
                             public void onNext(WeatherBean weatherBean) {
-
                                 item.get(0).setCity(weatherBean.getHeWeather5().get(0).getBasic().getCity()+"市");
                                 item.get(0).setTemp(weatherBean.getHeWeather5().get(0).getNow().getTmp()+"℃");
                                 item.get(0).setCode(weatherBean.getHeWeather5().get(0).getNow().getCond().getCode());
@@ -114,9 +88,7 @@ public class DrawerFragment extends BaseFragment implements DrawerContract.View 
                 onDrawerItemClick.onDrawerItemClick(mDraweritemList.get(position).getCity());
             }
         });
-
         mDraweritemAdapter.setOnDeleteBtnClickListener(position -> {
-
             new AlertDialog.Builder(getContext())
                     .setTitle("提示")
                     .setMessage("您确定将"+mDraweritemList.get(position).getCity()+"删除吗？")
@@ -130,24 +102,22 @@ public class DrawerFragment extends BaseFragment implements DrawerContract.View 
 
                         mDraweritemAdapter.notifyDataSetChanged();
                     }).show();
-
-
         });
-
-
         mDrawerRecy.setAdapter(mDraweritemAdapter);
 
+        add_btn = (Button)view.findViewById(R.id.add_city_btn);
+        add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SelectCityActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
 
     }
 
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-
-    }
 
     @Override
     public void onAttach(Context context){
@@ -156,40 +126,12 @@ public class DrawerFragment extends BaseFragment implements DrawerContract.View 
             onDrawerItemClick=(OnDrawerItemClick)context;
         }
     }
-    @Override
-    public void lazyload() {
 
-    }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPrsenter.loadItem();
-    }
-
-
-    @Override
-    public void setPresenter(DrawerContract.Presenter presenter) {
-        mPrsenter = presenter;
-    }
-
-
-    @OnClick(R.id.add_city_btn)
-    void onAddClick() {
-        Intent intent = new Intent(getActivity(), SelectCityActivity.class);
-        startActivity(intent);
-    }
-
-
-    @Override
-    public void showItem(List<DrawerItemORM> data) {
-
-        if(mDraweritemList!=null){
-            mDraweritemList.clear();
-        }
-
-        mDraweritemList.addAll(data);
-        mDraweritemAdapter.notifyDataSetChanged();
+        this.loadItem();
     }
 
 
@@ -200,7 +142,6 @@ public class DrawerFragment extends BaseFragment implements DrawerContract.View 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPrsenter.onunsubscribe();
         unbinder.unbind();
         if(subscription!=null&&!subscription.isUnsubscribed()){
             subscription.unsubscribe();
@@ -211,6 +152,16 @@ public class DrawerFragment extends BaseFragment implements DrawerContract.View 
 
     public interface OnDrawerItemClick{
         void onDrawerItemClick(String city);
+    }
+
+    public void loadItem(){
+        List<DrawerItemORM> mData=OrmLite.getInstance().query(DrawerItemORM.class);
+        if(mDraweritemList!=null){
+            mDraweritemList.clear();
+        }
+
+        mDraweritemList.addAll(mData);
+        mDraweritemAdapter.notifyDataSetChanged();
     }
 
 }

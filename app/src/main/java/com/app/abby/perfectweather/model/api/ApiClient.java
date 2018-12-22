@@ -6,7 +6,6 @@ import com.app.abby.perfectweather.util.RxUtil;
 import com.app.abby.perfectweather.util.Util;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -18,10 +17,6 @@ import okhttp3.Response;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-
-/**
- * Created by Abby on 7/23/2017.
- */
 
 public class ApiClient {
 

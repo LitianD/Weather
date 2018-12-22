@@ -2,16 +2,10 @@ package com.app.abby.perfectweather.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.support.v7.widget.SearchView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.app.abby.perfectweather.R;
-import com.app.abby.perfectweather.base.BaseActivity;
-import com.app.abby.perfectweather.contract.SelectCityContract;
-import com.app.abby.perfectweather.presenter.SelectCItyPresenter;
 import com.app.abby.perfectweather.util.Util;
 import com.app.abby.perfectweather.view.fragment.SelectCityFragment;
 
@@ -19,13 +13,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * Created by Abby on 8/29/2017.
- */
+public class SelectCityActivity extends AppCompatActivity {
 
-public class SelectCityActivity extends BaseActivity {
-
-    private SelectCityContract.Presenter presenter;
     private Unbinder unbinder;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -44,8 +33,6 @@ public class SelectCityActivity extends BaseActivity {
 
         fragment = new SelectCityFragment();
         Util.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fragment_container);
-
-        presenter = new SelectCItyPresenter(fragment);
 
     }
 

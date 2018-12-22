@@ -1,34 +1,29 @@
 package com.app.abby.perfectweather.activity;
 import android.Manifest;
+import android.app.Activity;
 import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.app.abby.perfectweather.R;
-import com.app.abby.perfectweather.base.BaseActivity;
 import com.app.abby.perfectweather.base.WeatherApplication;
 import com.app.abby.perfectweather.model.api.WeatherBean;
-import com.app.abby.perfectweather.presenter.DrawerPresenter;
-import com.app.abby.perfectweather.presenter.HomePagePresenter;
 import com.app.abby.perfectweather.sevices.WeatherService;
-import com.app.abby.perfectweather.util.FileSizeUtil;
 import com.app.abby.perfectweather.util.SharedPreferenceUtil;
 import com.app.abby.perfectweather.util.Util;
 import com.app.abby.perfectweather.view.fragment.BlankFragment;
@@ -36,7 +31,6 @@ import com.app.abby.perfectweather.view.fragment.BlankFragment2;
 import com.app.abby.perfectweather.view.fragment.DrawerFragment;
 import com.app.abby.perfectweather.view.fragment.DrawerFragment.OnDrawerItemClick;
 import com.app.abby.perfectweather.view.fragment.HomePageFragment;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
@@ -44,12 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-
-/**
- * Created by Abby on 8/13/2017.
- */
-
-public class MainActivity extends BaseActivity implements
+public class MainActivity extends AppCompatActivity implements
         HomePageFragment.OnFragmentInteractionListener, OnDrawerItemClick{
 
     private Unbinder unbinder;
@@ -80,9 +69,7 @@ public class MainActivity extends BaseActivity implements
 
     private AMapLocationClientOption mOtion;
     private AMapLocationClient mClient;
-    DrawerPresenter drawerpresenter;
 
-    HomePagePresenter pagePresenter;
     HomePageFragment homePageFragment;
     private BlankFragment blankFragment;
     private BlankFragment2 blankFragment2;
@@ -90,40 +77,36 @@ public class MainActivity extends BaseActivity implements
 
     private String cityName;
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//init BottomNavigationView
+        //初始化导航栏
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_home);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         this.fragmentId = R.id.navigation_home;
 
         unbinder = ButterKnife.bind(this);
-//initToolBar
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-//init Drawer
+        //设置左侧菜单
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-//initReference
+        //设置刷新监听函数
         refreshLayout.setOnRefreshListener(refreshlayout -> {
-            pagePresenter.loadWeather(SharedPreferenceUtil.getInstance().getCity(), false);
+            homePageFragment.loadWeather(SharedPreferenceUtil.getInstance().getCity(), false);
             refreshlayout.finishRefresh();
         });
-//InitPageFragement
+        //加载首页
         homePageFragment = HomePageFragment.newInstance();//获得首页对象
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homePageFragment).commit();
         //Util.addFragmentToActivity(getSupportFragmentManager(), homePageFragment, R.id.fragment_container);
         DrawerFragment drawerFragment = DrawerFragment.newInstance();
         Util.addFragmentToActivity(getSupportFragmentManager(), drawerFragment, R.id.fragment_container_drawer);
-
-        pagePresenter = new HomePagePresenter(homePageFragment);
-        drawerpresenter = new DrawerPresenter(drawerFragment);
 
         getPermission();//获得定位权限
     }
@@ -137,17 +120,15 @@ public class MainActivity extends BaseActivity implements
                 case R.id.navigation_home:
                     header_layout.setVisibility(View.VISIBLE);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homePageFragment).commit();
-                    pagePresenter.loadWeather(cityName, false);
+                    homePageFragment.loadWeather(cityName, false);
                     fragmentId = R.id.navigation_home;
                     return true;
                 case R.id.navigation_dashboard:
-                    //header_layout.setVisibility(View.GONE);
                     MainActivity.this.blankFragment = BlankFragment.newInstance("", "");
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment).commit();
                     fragmentId = R.id.navigation_dashboard;
                     return true;
                 case R.id.navigation_notifications:
-                    //header_layout.setVisibility(View.GONE);
                     MainActivity.this.blankFragment2 = BlankFragment2.newInstance("", "");
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment2).commit();
                     fragmentId = R.id.navigation_notifications;
@@ -164,8 +145,6 @@ public class MainActivity extends BaseActivity implements
             mClient.onDestroy();
         mClient = null;
         mOtion = null;
-        pagePresenter.onunsubscribe();
-        pagePresenter = null;
         unbinder.unbind();
     }
 
@@ -213,7 +192,7 @@ public class MainActivity extends BaseActivity implements
         mClient.setLocationOption(mOtion);
         mClient.setLocationListener(aMapLocation -> {
 
-            pagePresenter.loadWeather(aMapLocation.getCity(), true);
+            homePageFragment.loadWeather(aMapLocation.getCity(), true);
             SharedPreferenceUtil.getInstance().setCity(aMapLocation.getCity());
 
             if (SharedPreferenceUtil.getInstance().getNotificationModel() == Notification.FLAG_ONGOING_EVENT) {
@@ -235,15 +214,13 @@ public class MainActivity extends BaseActivity implements
     public void onDrawerItemClick(String city) {
         this.cityName = city;
         if(this.fragmentId == R.id.navigation_home)
-            pagePresenter.loadWeather(city, true);
+            homePageFragment.loadWeather(city, true);
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
+    //获取权限
     private void getPermission() {
-
-        //need to check permission above android 6.0
         RxPermissions rxPermissions = new RxPermissions(this);
-
         rxPermissions.request(Manifest.permission.ACCESS_COARSE_LOCATION)
                 .subscribe(granted -> {
                     if (granted) {
@@ -252,12 +229,10 @@ public class MainActivity extends BaseActivity implements
                         if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
                             Toast.makeText(WeatherApplication.getAppContext(), "未获得定位权限，加载默认城市", Toast.LENGTH_LONG).show();
                         }
-                        pagePresenter.loadWeather("beijing", true);
+                        homePageFragment.loadWeather("beijing", true);
                     }
                 });
-
     }
-
 
 }
 

@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.app.abby.perfectweather.R;
-import com.app.abby.perfectweather.base.BaseRecyclerViewAdapter;
 import com.app.abby.perfectweather.base.BaseViewHolder;
 import com.app.abby.perfectweather.model.database.DetailORM;
 import java.util.List;

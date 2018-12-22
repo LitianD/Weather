@@ -10,30 +10,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import com.app.abby.perfectweather.R;
-import com.app.abby.perfectweather.contract.SelectCityContract;
 import com.app.abby.perfectweather.model.RecyclerDecor.GroupedDecoration;
 import com.app.abby.perfectweather.model.api.ApiClient;
 import com.app.abby.perfectweather.model.api.WeatherBean;
+import com.app.abby.perfectweather.model.comparator.PinyinComparator;
 import com.app.abby.perfectweather.model.data.City;
 import com.app.abby.perfectweather.model.data.CityBean;
 import com.app.abby.perfectweather.model.data.Province;
+import com.app.abby.perfectweather.model.database.DBManager;
 import com.app.abby.perfectweather.model.database.DrawerItemORM;
 import com.app.abby.perfectweather.model.database.OrmLite;
+import com.app.abby.perfectweather.model.database.WeatherDB;
 import com.app.abby.perfectweather.view.adapter.CityListAdapter;
+import com.github.promeg.pinyinhelper.Pinyin;
 import com.litesuits.orm.db.assit.QueryBuilder;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import rx.Subscriber;
 import rx.Subscription;
 
-/**
- * Created by Abby on 8/29/2017.
- */
-
-public class SelectCityFragment extends Fragment implements SelectCityContract.View{
+public class SelectCityFragment extends Fragment{
 
     private Subscription subscription;
     private List<String> mData;
@@ -47,10 +47,7 @@ public class SelectCityFragment extends Fragment implements SelectCityContract.V
 
     private Province mSelectedProvence;
 
-    private SelectCityContract.Presenter mPresenter;
-
     public SelectCityFragment() {
-
         mData=new ArrayList<>();
         mCityBean=new ArrayList<>();
         mProvinces=new ArrayList<>();
@@ -77,7 +74,7 @@ public class SelectCityFragment extends Fragment implements SelectCityContract.V
             if(mCurrentLevel==LEVEL_PROVINCE){
 
                 mSelectedProvence=mProvinces.get(position);
-                mPresenter.loadCities(mSelectedProvence.ProSort);
+                queryCities(mSelectedProvence.ProSort);
                 mCitiList.smoothScrollToPosition(0);
                 mCurrentLevel=LEVEL_CITY;
 
@@ -116,19 +113,9 @@ public class SelectCityFragment extends Fragment implements SelectCityContract.V
 
         mCitiList.setAdapter(mCityAdapter);
 
-        mPresenter.loadProvinces();
+        //mPresenter.loadProvinces();
+        queryProvinces();
         return rootView;
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view,savedInstanceState);
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
 
     }
 
@@ -140,14 +127,6 @@ public class SelectCityFragment extends Fragment implements SelectCityContract.V
         }
     }
 
-
-
-    @Override
-    public void setPresenter(SelectCityContract.Presenter presenter){
-        mPresenter= presenter;
-    }
-
-    @Override
     public void updateCities(List<City> cities,List<CityBean> cityBeen){
         if(mCityBean!=null)
             mCityBean.clear();
@@ -165,8 +144,6 @@ public class SelectCityFragment extends Fragment implements SelectCityContract.V
 
     }
 
-
-    @Override
     public void updateProvinces(List<Province> provinces,List<CityBean> cityBeen){
 
         if(mProvinces!=null)
@@ -189,6 +166,38 @@ public class SelectCityFragment extends Fragment implements SelectCityContract.V
         mCityAdapter.notifyDataSetChanged();
     }
 
+    public void queryCities(int  portnum){
+        List<City>mCities = new ArrayList<City>();
+        List<CityBean>mCitiybeans = new ArrayList<CityBean>();
 
+        mCities.addAll(WeatherDB.loadCities(new DBManager().getDatabase(),portnum));
+        Collections.sort(mCities,new PinyinComparator());
 
+        for(int i=0;i<mCities.size();i++){
+            String s=Pinyin.toPinyin(mCities.get(i).CityName,"").substring(0,1).toUpperCase();
+            mCitiybeans.add(new CityBean(s,mCities.get(i).CityName));
+        }
+
+        updateCities(mCities,mCitiybeans);
+    }
+
+    private void queryProvinces() {
+        List<Province>mProvinces = new ArrayList<Province>();
+        List<CityBean>mCitiybeans = new ArrayList<CityBean>();
+
+        if (mCitiybeans != null)
+            mCitiybeans.clear();
+
+        if(mProvinces!=null){
+            mProvinces.clear();
+        }
+        mProvinces.addAll(WeatherDB.loadProvinces(new DBManager().getDatabase()));
+        Collections.sort(mProvinces, new PinyinComparator());
+
+        for (int i = 0; i < mProvinces.size(); i++) {
+            String s = Pinyin.toPinyin(mProvinces.get(i).ProName, "").substring(0, 1).toUpperCase();
+            mCitiybeans.add(new CityBean(s, mProvinces.get(i).ProName));
+        }
+        updateProvinces(mProvinces, mCitiybeans);
+    }
 }
