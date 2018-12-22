@@ -7,16 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.app.abby.perfectweather.R;
+import com.app.abby.perfectweather.model.data.NewsBean;
 
 import java.util.List;
 
-public class FriendsCircleAdapter extends RecyclerView.Adapter<FriendsCircleAdapter.ViewHolder> {
+public class NewsCircleAdapter extends RecyclerView.Adapter<NewsCircleAdapter.ViewHolder> {
     private Context mContext;
 
-    private List<Integer> mDatas;
-    public FriendsCircleAdapter(List<Integer> data) {
+    private List<NewsBean.Bean> mDatas;
+    public NewsCircleAdapter(List<NewsBean.Bean> data) {
         this.mDatas = data;
     }
 
@@ -33,8 +35,10 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter<FriendsCircleAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder,int position) {
+
         holder.image2.setVisibility(View.GONE);
         holder.image3.setVisibility(View.GONE);
+        holder.textView.setText(mDatas.get(position).getLtitle());
     }
 
 
@@ -49,12 +53,14 @@ public class FriendsCircleAdapter extends RecyclerView.Adapter<FriendsCircleAdap
         ImageView image1;
         ImageView image2;
         ImageView image3;
+        TextView textView;
         public ViewHolder(View view) {
             super(view);
             cardView = (CardView) view;
             image1 = (ImageView) view.findViewById(R.id.friend_image1);
             image2 = (ImageView) view.findViewById(R.id.friend_image1);
             image3 = (ImageView) view.findViewById(R.id.friend_image1);
+            textView = (TextView) view.findViewById(R.id.friend_name);
         }
     }
 

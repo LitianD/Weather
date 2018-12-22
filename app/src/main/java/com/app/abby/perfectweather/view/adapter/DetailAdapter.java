@@ -60,5 +60,4 @@ public class DetailAdapter extends BaseRecyclerViewAdapter<DetailAdapter.ViewHol
         }
     }
 
-
 }

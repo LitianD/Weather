@@ -115,8 +115,4 @@ public class ApiClient {
                         }).map(weatherAPI -> {return weatherAPI;})
                         .compose(RxUtil.rxSchedulerHelper());
     }
-
-
-
-
 }
