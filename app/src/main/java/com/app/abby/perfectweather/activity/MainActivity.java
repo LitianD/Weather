@@ -32,6 +32,7 @@ import com.app.abby.perfectweather.view.fragment.DrawerFragment;
 import com.app.abby.perfectweather.view.fragment.DrawerFragment.OnDrawerItemClick;
 import com.app.abby.perfectweather.view.fragment.HomePageFragment;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.yalantis.phoenix.PullToRefreshView;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.BindView;
@@ -62,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements
     Toolbar toolbar;
 
     @BindView(R.id.refresh_layout)
-    RefreshLayout refreshLayout;
+    PullToRefreshView refreshLayout;
+
 
     @BindView(R.id.header)
     RelativeLayout header_layout;
@@ -97,10 +99,17 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         //设置刷新监听函数
-        refreshLayout.setOnRefreshListener(refreshlayout -> {
+        refreshLayout.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                homePageFragment.loadWeather(SharedPreferenceUtil.getInstance().getCity(), false);
+                refreshLayout.setRefreshing(false);
+            }
+        });
+        /*refreshLayout.setOnRefreshListener(refreshlayout -> {
             homePageFragment.loadWeather(SharedPreferenceUtil.getInstance().getCity(), false);
             refreshlayout.finishRefresh();
-        });
+        });*/
         //加载首页
         homePageFragment = HomePageFragment.newInstance();//获得首页对象
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homePageFragment).commit();

@@ -112,8 +112,6 @@ public class SelectCityFragment extends Fragment{
         });
 
         mCitiList.setAdapter(mCityAdapter);
-
-        //mPresenter.loadProvinces();
         queryProvinces();
         return rootView;
 
