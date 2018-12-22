@@ -17,4 +17,12 @@
         <item name="android:windowBackground">@drawable/bg_launcher</item>
     </style>
 
+    <style name="common_mProgress_circle">
+        <item name="android:indeterminateDuration">900</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_cirle</item>
+        <item name="android:minWidth">30dp</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:maxWidth">60dp</item>
+        <item name="android:maxHeight">60dp</item>
+    </style>
 </resources>
