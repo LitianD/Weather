@@ -68,12 +68,10 @@ public class DrawerFragment extends Fragment {
                         .subscribe(new Subscriber<WeatherBean>() {
                             @Override
                             public void onCompleted() {
-
                             }
 
                             @Override
                             public void onError(Throwable e) {
-
                             }
 
                             @Override

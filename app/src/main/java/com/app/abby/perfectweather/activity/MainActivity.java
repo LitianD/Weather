@@ -44,29 +44,13 @@ public class MainActivity extends AppCompatActivity implements
 
     private Unbinder unbinder;
 
-    @BindView(R.id.update_time)
     TextView update_time;
-
-    @BindView(R.id.temp)
     TextView temp;
-
-    @BindView(R.id.condition)
     TextView condition;
-
-    @BindView(R.id.city)
     TextView city;
-
-    @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    @BindView(R.id.refresh_layout)
     PullToRefreshView refreshLayout;
-
-
-    @BindView(R.id.header)
     RelativeLayout header_layout;
 
     private AMapLocationClientOption mOtion;
@@ -83,6 +67,17 @@ public class MainActivity extends AppCompatActivity implements
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.update_time = (TextView)findViewById(R.id.update_time);
+        this.temp = (TextView)findViewById(R.id.temp);
+        this.condition = (TextView)findViewById(R.id.condition);
+        this.city = (TextView)findViewById(R.id.city);
+        this.drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        this.toolbar = (Toolbar)findViewById(R.id.toolbar);
+        this.refreshLayout = (PullToRefreshView)findViewById(R.id.refresh_layout);
+        this.header_layout = (RelativeLayout)findViewById(R.id.header);
+
+
         //初始化导航栏
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_home);

@@ -14,10 +14,6 @@ import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * Created by Abby on 9/2/2017.
- */
-
 public class LifeIndexAdapter extends BaseRecyclerViewAdapter<LifeIndexAdapter.ViewHolder>{
 
     private List<LifeIndexOrm> mData;

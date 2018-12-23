@@ -69,7 +69,7 @@ public class HomePageFragment extends Fragment {
 
         detailRecy = (RecyclerView)rootView.findViewById(R.id.detail_recyclerview);
         detailRecy.setNestedScrollingEnabled(false);
-        detailRecy.setLayoutManager(new GridLayoutManager(WeatherApplication.getAppContext(), 3));
+        detailRecy.setLayoutManager(new GridLayoutManager(WeatherApplication.getAppContext(), 2));
         detailORMs=new ArrayList<>();
         detailAdapter=new DetailAdapter(detailORMs);
         detailRecy.setAdapter(detailAdapter);

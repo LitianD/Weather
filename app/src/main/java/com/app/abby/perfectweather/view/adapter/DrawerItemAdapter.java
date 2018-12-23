@@ -40,29 +40,22 @@ public class DrawerItemAdapter extends RecyclerView.Adapter<DrawerItemAdapter.Vi
             int code=Integer.parseInt(mDraweritem.get(position).getCode());
             if(code==100){
                 holder.iconView.setImageResource(R.drawable.sunny);
-                holder.item_view.setBackgroundResource(R.drawable.city_bg_sunny);
             }else if(code>100&&code<=213){
                 holder.iconView.setImageResource(R.drawable.cloudy);
-                holder.item_view.setBackgroundResource(R.drawable.city_bg_cloudy);
             }else if(code>213&&code<=301){
                 holder.iconView.setImageResource(R.drawable.light_rain);
-                holder.item_view.setBackgroundResource(R.drawable.city_bg_rainy);
             }else if (code>301&&code<=304){
                 holder.iconView.setImageResource(R.drawable.thunder_rain);
-                holder.item_view.setBackgroundResource(R.drawable.city_bg_rainy);
             }else if(code>304&&code<=306){
                 holder.iconView.setImageResource(R.drawable.light_rain);
-                holder.item_view.setBackgroundResource(R.drawable.city_bg_rainy);
             }else if (code>306&&code<=312){
                 holder.iconView.setImageResource(R.drawable.heavy_rain);
-                holder.item_view.setBackgroundResource(R.drawable.city_bg_rainy);
             }else if(code>=313&&code<=407){
                 holder.iconView.setImageResource(R.drawable.snow);
-                holder.item_view.setBackgroundResource(R.drawable.city_bg_rainy);
             }else if(code>407){
                 holder.iconView.setImageResource(R.drawable.fog);
-                holder.item_view.setBackgroundResource(R.drawable.city_bg_cloudy);
             }
+            holder.item_view.setBackgroundResource(R.drawable.menu_bac);
     }
 
 

@@ -3,18 +3,18 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimaryDark">#FF4081</item>
-        <item name="colorPrimary">#00cc00</item>
-        <item name="colorAccent">#FF4081</item>
+        <item name="colorPrimaryDark">#3A5FCD</item>
+        <item name="colorPrimary">#3A5FCD</item>
+        <item name="colorAccent">#3A5FCD</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="PopUpToolbar" parent="Theme.AppCompat.Light">
-        <item name="android:background">#FF4081</item>
+        <item name="android:background">#3A5FCD</item>
     </style>
 
     <style name="LaunchTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/bg_launcher</item>
+        <item name="android:windowBackground">@drawable/lunch</item>
     </style>
 
     <style name="common_mProgress_circle">

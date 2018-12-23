@@ -11,10 +11,6 @@ import java.util.List;
 import butterknife.BindView;
 
 
-/**
- * Created by Abby on 8/14/2017.
- */
-
 public class DetailAdapter extends BaseRecyclerViewAdapter<DetailAdapter.ViewHolder>{
 
     private List<DetailORM> detailORM;
@@ -32,7 +28,7 @@ public class DetailAdapter extends BaseRecyclerViewAdapter<DetailAdapter.ViewHol
     @Override
     public void onBindViewHolder(DetailAdapter.ViewHolder holder,int position){
 
-        holder.detailIconView.setImageResource(detailORM.get(position).getIconRes());
+        //holder.detailIconView.setImageResource(detailORM.get(position).getIconRes());
         holder.detailKey.setText(detailORM.get(position).getKey());
         holder.detailTextView.setText(detailORM.get(position).getValue());
 
@@ -45,8 +41,8 @@ public class DetailAdapter extends BaseRecyclerViewAdapter<DetailAdapter.ViewHol
 
 
     static class ViewHolder extends BaseViewHolder{
-        @BindView(R.id.detail_icon)
-        ImageView detailIconView;
+        /*@BindView(R.id.detail_icon)
+        ImageView detailIconView;*/
 
         @BindView(R.id.detail_txt)
         TextView detailTextView;

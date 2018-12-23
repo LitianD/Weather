@@ -5,7 +5,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="12dp"
     android:descendantFocusability="blocksDescendants"

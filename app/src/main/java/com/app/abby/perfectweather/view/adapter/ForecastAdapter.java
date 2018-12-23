@@ -14,10 +14,6 @@ import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * Created by Abby on 8/17/2017.
- */
-
 public class ForecastAdapter extends BaseRecyclerViewAdapter<ForecastAdapter.ViewHolder>{
 
 

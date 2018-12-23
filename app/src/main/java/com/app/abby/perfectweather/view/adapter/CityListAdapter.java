@@ -11,10 +11,6 @@ import java.util.List;
 import com.app.abby.perfectweather.base.BaseViewHolder;
 import butterknife.BindView;
 
-/**
- * Created by Abby on 8/29/2017.
- */
-
 public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHolder> {
 
     private List<String> mcities;
