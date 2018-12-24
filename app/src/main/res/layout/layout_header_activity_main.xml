@@ -8,47 +8,46 @@
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
+        android:layout_height="wrap_content">
 
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                android:minHeight="25dp"
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
+                android:minHeight="25dp"
+                app:contentScrim="@color/colorAccent"
                 app:expandedTitleMarginBottom="16dp"
                 app:expandedTitleMarginStart="8dp"
-                app:contentScrim="@color/colorAccent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 tools:context=".activity.MainActivity">
 
                 <RelativeLayout
-                    android:background="@drawable/head"
                     android:id="@+id/header"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/head"
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax">
 
                     <TextView
                         android:id="@+id/update_time"
-                        android:textColor="@android:color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginBottom="4dp"
+                        android:layout_alignParentBottom="true"
                         android:layout_marginEnd="4dp"
-                        android:text="@string/update" />
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/update"
+                        android:textColor="@android:color/white" />
 
                     <TextView
                         android:id="@+id/temp"
@@ -56,10 +55,10 @@
                         android:layout_height="wrap_content"
                         android:layout_above="@id/update_time"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="12dp"
                         android:text="@string/temp"
-                        android:textSize="@dimen/temp_main"
                         android:textColor="@android:color/white"
-                        android:layout_marginEnd="12dp"/>
+                        android:textSize="@dimen/temp_main" />
 
                     <TextView
                         android:id="@+id/condition"
@@ -67,21 +66,21 @@
                         android:layout_height="wrap_content"
                         android:layout_above="@id/temp"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="12dp"
                         android:text="@string/weather_conditon"
-                        android:textSize="24sp"
                         android:textColor="@android:color/white"
-                        android:layout_marginEnd="12dp"/>
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentBottom="true"
+                        android:layout_centerVertical="true"
                         android:layout_margin="4dp"
                         android:text="@string/city"
-                        android:textSize="@dimen/city_txt"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/city_txt" />
 
 
                 </RelativeLayout>
@@ -90,8 +89,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    />
+                    app:layout_collapseMode="pin" />
             </android.support.design.widget.CollapsingToolbarLayout>
 
 
@@ -102,8 +100,8 @@
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:background="#F8F8FF">
+            android:background="#F8F8FF"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>

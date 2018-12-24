@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements
     Toolbar toolbar;
     PullToRefreshView refreshLayout;
     RelativeLayout header_layout;
+    AppBarLayout appBarLayout;
 
     private AMapLocationClientOption mOtion;
     private AMapLocationClient mClient;
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements
         this.toolbar = (Toolbar)findViewById(R.id.toolbar);
         this.refreshLayout = (PullToRefreshView)findViewById(R.id.refresh_layout);
         this.header_layout = (RelativeLayout)findViewById(R.id.header);
+        this.appBarLayout = (AppBarLayout)findViewById(R.id.app_bar);
 
 
         //初始化导航栏
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onRefresh() {
                 homePageFragment.loadWeather(SharedPreferenceUtil.getInstance().getCity(), false);
+
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -128,11 +134,19 @@ public class MainActivity extends AppCompatActivity implements
                     fragmentId = R.id.navigation_home;
                     return true;
                 case R.id.navigation_dashboard:
+                    header_layout.setVisibility(View.GONE);
+//                    ViewGroup.LayoutParams para2;
+//                    para2 = header_layout.getLayoutParams();
+//                    para2.height=0;
+//                    header_layout.setLayoutParams(para2);
+                    //appBarLayout.hi(View.GONE);
                     MainActivity.this.blankFragment = BlankFragment.newInstance("", "");
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment).commit();
                     fragmentId = R.id.navigation_dashboard;
                     return true;
                 case R.id.navigation_notifications:
+                    //appBarLayout.setVisibility(View.INVISIBLE);
+                    header_layout.setVisibility(View.GONE);
                     MainActivity.this.blankFragment2 = BlankFragment2.newInstance("", "");
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment2).commit();
                     fragmentId = R.id.navigation_notifications;
