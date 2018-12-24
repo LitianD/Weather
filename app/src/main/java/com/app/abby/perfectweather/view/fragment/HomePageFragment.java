@@ -29,7 +29,6 @@ import com.app.abby.perfectweather.util.SharedPreferenceUtil;
 import com.app.abby.perfectweather.util.Util;
 import com.app.abby.perfectweather.view.adapter.DetailAdapter;
 import com.app.abby.perfectweather.view.adapter.ForecastAdapter;
-import com.app.abby.perfectweather.view.adapter.LifeIndexAdapter;
 import com.app.abby.tsnackbar.TSnackbar;
 
 
@@ -45,18 +44,15 @@ import rx.Subscriber;
 public class HomePageFragment extends Fragment {
 
     private Unbinder unbinder;
-    //三个RecyclerView
+
     RecyclerView detailRecy;
     RecyclerView forecastRecy;
-    RecyclerView lifeRecy;
-    //三个RecyclerView对应的适配器
+
     private DetailAdapter detailAdapter;
     private ForecastAdapter forecastAdapter;
-    private LifeIndexAdapter lifeIndexAdapter;
-    //三个RecyclerView对应的数据列表
+
     private List<DetailORM> detailORMs;
     private List<ForecastORM> forecastORMs;
-    private List<LifeIndexOrm> lifeIndexOrms;
 
     private OnFragmentInteractionListener onFragmentInteractionListener;
     //顶部状态栏用于显示加载状态
@@ -81,12 +77,6 @@ public class HomePageFragment extends Fragment {
         forecastAdapter=new ForecastAdapter(forecastORMs);
         forecastRecy.setAdapter(forecastAdapter);
 
-        lifeRecy = (RecyclerView)rootView.findViewById(R.id.lifeindex_recyclerview) ;
-        lifeRecy.setNestedScrollingEnabled(false);
-        lifeRecy.setLayoutManager(new LinearLayoutManager(WeatherApplication.getAppContext()));
-        lifeIndexOrms=new ArrayList<>();
-        lifeIndexAdapter=new LifeIndexAdapter(lifeIndexOrms);
-        lifeRecy.setAdapter(lifeIndexAdapter);
 
         return rootView;
     }
@@ -118,9 +108,6 @@ public class HomePageFragment extends Fragment {
         forecastORMs.addAll(createForecasts(weather));
         forecastAdapter.notifyDataSetChanged();
 
-        lifeIndexOrms.clear();
-        lifeIndexOrms.addAll(createLifeIndex(weather));
-        lifeIndexAdapter.notifyDataSetChanged();
 
 
         showNotificationbar(weather);
