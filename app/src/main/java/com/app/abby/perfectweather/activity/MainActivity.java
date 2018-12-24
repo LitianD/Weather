@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity implements
@@ -139,6 +141,21 @@ public class MainActivity extends AppCompatActivity implements
                     return true;
             }
             return false;
+        }
+
+    };
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            // 这里的是TextView的点击事件
+            LinearLayout tv = (LinearLayout) view;
+            switch (tv.getId()){
+                case R.id.user_setting:{
+                    Intent intentToMap = new Intent(MainActivity.this,SettingActivity.class);
+                    startActivity(intentToMap);
+                    break;
+                }
+            }
         }
     };
 

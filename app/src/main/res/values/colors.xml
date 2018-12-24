@@ -3,4 +3,10 @@
 <color name="colorPrimary">#add8e6</color>
 <color name="colorPrimaryDark">#add8e6</color>
 <color name="colorAccent">#3A5FCD</color>
+        <!-- 描边颜色 -->
+        <color name="border_clo">#ccc</color>
+        <color name="text_clo">#333</color>
+        <color name="white">#fff</color>
+        <color name="blue">#419DE4</color>
+
 </resources>
