@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,12 +8,12 @@
     cardView:elevation="1dp"
     app:cardCornerRadius="6dp"
     android:id="@+id/daily_forecast"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp">-->
 
     <RelativeLayout
-
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="48dp">
 
         <TextView
             android:id="@+id/weekday"
@@ -37,7 +38,7 @@
             android:id="@+id/condition"
             android:layout_centerVertical="true"
             android:text="@string/weather_conditon"
-            android:layout_toRightOf="@id/icon"
+            android:layout_toRightOf="@id/date"
             android:layout_marginStart="16dp"
            />
         <ImageView
@@ -46,8 +47,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_sunny_black_24dp"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/date"
-            android:layout_marginStart="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
             />
 
         <TextView
@@ -55,10 +56,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
+            android:layout_toLeftOf="@id/icon"
             android:text="@string/min_temp"
+            android:layout_marginRight="10dp"
             android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/min_temp"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"
+            android:text="↓"/>
 
         <TextView
             android:id="@+id/max_temp"
@@ -66,9 +75,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/min_temp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/max_temp"/>
+            android:layout_marginRight="15dp"
+            android:text="@string/max_temp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/max_temp"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"
+            android:text="↑"/>
     </RelativeLayout>
 
+<!--
 
-</android.support.v7.widget.CardView>
+</android.support.v7.widget.CardView>-->
