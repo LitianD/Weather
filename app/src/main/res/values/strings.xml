@@ -21,8 +21,8 @@
     <string name="tip">提示</string>
     <string name="add_city">添加城市</string>
     <string name="title">请选择省份或城市</string>
-    <string name="author">Jianming</string>
-    <string name="email">email:1358890401@qq.com</string>
+    <string name="author">Tom</string>
+    <string name="email">email:xxxxxx@163.com</string>
     <string name="warning">检测到定位服务已经关闭，为了给您提供更好的体验，建议您在设置里打开定位服务</string>
     <string name="title_activity_weather">weatherActivity</string>
     <string name="title_home">主页</string>
