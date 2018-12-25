@@ -28,6 +28,7 @@ import com.app.abby.perfectweather.util.SharedPreferenceUtil;
 import com.app.abby.perfectweather.util.Util;
 import com.app.abby.perfectweather.view.fragment.BlankFragment;
 import com.app.abby.perfectweather.view.fragment.BlankFragment2;
+import com.app.abby.perfectweather.view.fragment.BlankFragment3;
 import com.app.abby.perfectweather.view.fragment.DrawerFragment;
 import com.app.abby.perfectweather.view.fragment.DrawerFragment.OnDrawerItemClick;
 import com.app.abby.perfectweather.view.fragment.HomePageFragment;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements
     HomePageFragment homePageFragment;
     private BlankFragment blankFragment;
     private BlankFragment2 blankFragment2;
+    private BlankFragment3 blankFragment3;
     private int fragmentId;
 
 
@@ -151,8 +153,11 @@ public class MainActivity extends AppCompatActivity implements
                         fragmentId = R.id.navigation_notifications;
                         return true;
                     }else{
-                        Intent i = new Intent(MainActivity.this,LoginActivity.class);
-                        startActivity(i);
+                        header_layout.setVisibility(View.GONE);
+                        MainActivity.this.blankFragment3 = BlankFragment3.newInstance("", "");
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment3).commit();
+                        fragmentId = R.id.navigation_notifications;
+                        return true;
                     }
             }
             return false;

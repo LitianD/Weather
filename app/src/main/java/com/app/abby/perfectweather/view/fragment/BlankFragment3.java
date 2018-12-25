@@ -1,9 +1,7 @@
 package com.app.abby.perfectweather.view.fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,49 +11,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.abby.perfectweather.R;
-import com.app.abby.perfectweather.activity.ADetailActivity;
-import com.app.abby.perfectweather.activity.MainActivity;
+import com.app.abby.perfectweather.activity.LoginActivity;
 import com.app.abby.perfectweather.activity.SettingActivity;
-import com.tencent.connect.share.QQShare;
-import com.tencent.connect.share.QzoneShare;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BlankFragment2.OnFragmentInteractionListener} interface
+ * {@link BlankFragment3.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BlankFragment2#newInstance} factory method to
+ * Use the {@link BlankFragment3#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment2 extends Fragment {
+public class BlankFragment3 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static String ARG_PARAM1 = "param1";
     private static String ARG_PARAM2 = "param2";
-    LinearLayout setting,about,share;
+    LinearLayout unlogin,about;
     View view;
-    TextView tv_username;
-    TextView tv_userid;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public BlankFragment2() {
+    public BlankFragment3() {
         // Required empty public constructor
     }
 
@@ -68,8 +50,8 @@ public class BlankFragment2 extends Fragment {
      * @return A new instance of fragment BlankFragment2.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlankFragment2 newInstance(String param1, String param2) {
-        BlankFragment2 fragment = new BlankFragment2();
+    public static BlankFragment3 newInstance(String param1, String param2) {
+        BlankFragment3 fragment = new BlankFragment3();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -91,7 +73,7 @@ public class BlankFragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_blank_fragment2, container, false);
+        view = inflater.inflate(R.layout.fragment_blank_fragment3, container, false);
         initalView();
         //TextView textView = (TextView)view.findViewById(R.id.f2_text1);
         //textView.setText("hahha");
@@ -100,44 +82,17 @@ public class BlankFragment2 extends Fragment {
     }
 
     private void initalView() {
-        tv_userid = (TextView) view.findViewById(R.id.user_id);
-        tv_username = (TextView) view.findViewById(R.id.user_name);
-        tv_username.setText(mParam1);
-        tv_userid.setText(mParam2);
+
     }
 
     private void setLisener() {
-        share=(LinearLayout) view.findViewById(R.id.share);
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String[] items3 = new String[]{"QQ分享", "QQ空间分享"};//创建item
-                AlertDialog alertDialog3 = new AlertDialog.Builder(getContext())
-                        .setTitle("选择您的分享")
-                        .setIcon(R.drawable.share)
-                        .setItems(items3, new DialogInterface.OnClickListener() {//添加列表
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(getContext(), "点的是：" + items3[i] + i, Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加取消
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(getContext(), "这是取消按钮", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .create();
-                alertDialog3.show();
-            }
-        });
-        setting=(LinearLayout) view.findViewById(R.id.user_setting);
-        setting.setOnClickListener(new View.OnClickListener() {
+        unlogin = (LinearLayout) view.findViewById(R.id.unlogin);
+        unlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-                Intent intent = new Intent(context, SettingActivity.class);
-                context.startActivity(intent);
+                Intent i = new Intent(context, LoginActivity.class);
+                context.startActivity(i);
             }
         });
         about = (LinearLayout) view.findViewById(R.id.user_about);
@@ -166,8 +121,8 @@ public class BlankFragment2 extends Fragment {
         }
     }
 
-/*
-    @Override
+
+  /*  @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -183,7 +138,7 @@ public class BlankFragment2 extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
+    /*
     //qq分享
     private void onClickShare() {
         final Bundle params = new Bundle();
@@ -240,7 +195,7 @@ public class BlankFragment2 extends Fragment {
                     new BaseUiListener1());
         } catch (Exception e) {
         }
-    }
+    }*/
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

@@ -61,8 +61,16 @@
         <!-- 上圆角-->
         <LinearLayout style="@style/top_layout">
 
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/area" />
+
             <TextView
                 style="@style/usertext"
+                android:layout_width="275dp"
                 android:text="收藏地区" />
 
             <ImageView style="@style/img_arrow" />
@@ -71,15 +79,29 @@
         <!-- 分割线 -->
         <View style="@style/bg_line"/>
         <!-- 无圆角-->
-        <LinearLayout style="@style/mid_layout">
+        <LinearLayout
+            android:id="@+id/share"
+            style="@style/mid_layout">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_menu_share" />
 
             <TextView
                 style="@style/usertext"
+                android:layout_width="275dp"
                 android:layout_height="wrap_content"
-                android:text="我的资料" />
-            <ImageView style="@style/img_arrow"/>
+                android:text="分享" />
+
+            <ImageView style="@style/img_arrow" />
         </LinearLayout>
-        <View style="@style/bg_line"/>
+
+        <View
+            style="@style/bg_line"
+            android:layout_height="2dp" />
         <!-- 下圆角-->
         <LinearLayout
             android:id="@+id/user_setting"
@@ -87,8 +109,15 @@
             android:clickable="true"
             android:focusable="true">
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_settings_black_24dp" />
+
             <TextView
                 style="@style/usertext"
+                android:layout_width="275dp"
                 android:text="内容设置" />
 
             <ImageView style="@style/img_arrow" />
@@ -104,8 +133,16 @@
             android:id="@+id/user_about"
             style="@style/single_layout">
 
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/about" />
+
             <TextView
                 style="@style/usertext"
+                android:layout_width="275dp"
                 android:text="关于" />
 
             <ImageView style="@style/img_arrow" />
