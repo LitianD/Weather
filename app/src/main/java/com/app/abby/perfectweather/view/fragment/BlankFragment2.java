@@ -203,7 +203,7 @@ public class BlankFragment2 extends Fragment {
                 "http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "切切歆语");
         params.putString(QQShare.SHARE_TO_QQ_EXT_INT, "其他附加功能");
-        Tencent mTencent = Tencent.createInstance("1106062414",
+        Tencent mTencent = Tencent.createInstance("1108071510",
                 getContext());
         mTencent.shareToQQ((Activity) getContext(), params, new BaseUiListener1());
     }
@@ -240,7 +240,7 @@ public class BlankFragment2 extends Fragment {
             params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imageUrls);
             params.putInt(QzoneShare.SHARE_TO_QQ_EXT_INT,
                     QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
-            Tencent mTencent = Tencent.createInstance("1106062414",
+            Tencent mTencent = Tencent.createInstance("1108071510",
                     getContext());
             mTencent.shareToQzone((Activity) getContext(), params,
                     new BaseUiListener1());

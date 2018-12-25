@@ -74,7 +74,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="tencent1106062414" />
+                <data android:scheme="tencent1108071510" />
                 <!--应用的AppId要相同-->
             </intent-filter>
         </activity>

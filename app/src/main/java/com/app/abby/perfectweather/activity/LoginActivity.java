@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     public static Tencent mTencent;
     private UserInfo mInfo;
     private Button btqq;
-    public static String mAppid="1106062414";
+    public static String mAppid="1108071510";
 
 
     @Override
