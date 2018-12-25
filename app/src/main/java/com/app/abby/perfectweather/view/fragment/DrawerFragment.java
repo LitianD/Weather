@@ -1,5 +1,6 @@
 package com.app.abby.perfectweather.view.fragment;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -107,6 +108,7 @@ public class DrawerFragment extends Fragment {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Activity activity = getActivity();
                 Intent intent = new Intent(getActivity(), SelectCityActivity.class);
                 startActivity(intent);
             }

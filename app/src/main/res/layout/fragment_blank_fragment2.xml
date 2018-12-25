@@ -59,7 +59,9 @@
 
     <LinearLayout style="@style/wrap_layout" >
         <!-- 上圆角-->
-        <LinearLayout style="@style/top_layout">
+        <LinearLayout
+            android:id="@+id/area"
+            style="@style/top_layout">
 
             <ImageView
                 android:id="@+id/imageView10"

@@ -1,5 +1,6 @@
 package com.app.abby.perfectweather.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import com.app.abby.perfectweather.R;
+import com.app.abby.perfectweather.activity.LoginActivity;
+import com.app.abby.perfectweather.activity.MainActivity;
 import com.app.abby.perfectweather.model.RecyclerDecor.GroupedDecoration;
 import com.app.abby.perfectweather.model.api.ApiClient;
 import com.app.abby.perfectweather.model.api.WeatherBean;
@@ -97,6 +100,7 @@ public class SelectCityFragment extends Fragment{
 
                                     OrmLite.getInstance().save(new DrawerItemORM(mData.get(position),weatherBean.getHeWeather5().get(0).getNow().getTmp()+"℃",weatherBean.getHeWeather5().get(0).getNow().getCond().getCode()));
                                     Toast.makeText(getContext(),"已经成功添加"+mData.get(position),Toast.LENGTH_SHORT).show();
+
                                     getActivity().finish();
                                 }
                             });
@@ -167,21 +171,26 @@ public class SelectCityFragment extends Fragment{
     public void queryCities(int  portnum){
         List<City>mCities = new ArrayList<City>();
         List<CityBean>mCitiybeans = new ArrayList<CityBean>();
-
+        List<String>c = new ArrayList<>();
         mCities.addAll(WeatherDB.loadCities(new DBManager().getDatabase(),portnum));
         Collections.sort(mCities,new PinyinComparator());
 
         for(int i=0;i<mCities.size();i++){
             String s=Pinyin.toPinyin(mCities.get(i).CityName,"").substring(0,1).toUpperCase();
             mCitiybeans.add(new CityBean(s,mCities.get(i).CityName));
+            c.add(mCities.get(i).CityName);
         }
-
+        Intent i = new Intent(getContext(),MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList("cities", (ArrayList<String>) c);
+        i.putExtras(bundle);
         updateCities(mCities,mCitiybeans);
     }
 
     private void queryProvinces() {
         List<Province>mProvinces = new ArrayList<Province>();
         List<CityBean>mCitiybeans = new ArrayList<CityBean>();
+        List<String>Provinces_name = new ArrayList<String>();
 
         if (mCitiybeans != null)
             mCitiybeans.clear();

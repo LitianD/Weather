@@ -41,17 +41,19 @@ import butterknife.OnClick;
  * create an instance of this fragment.
  */
 public class BlankFragment2 extends Fragment {
+    private static String ARG_PARAM3 = "param3";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static String ARG_PARAM1 = "param1";
     private static String ARG_PARAM2 = "param2";
-    LinearLayout setting,about,share;
+    LinearLayout setting,about,share,area;
     View view;
     TextView tv_username;
     TextView tv_userid;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String mParam3;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,11 +70,12 @@ public class BlankFragment2 extends Fragment {
      * @return A new instance of fragment BlankFragment2.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlankFragment2 newInstance(String param1, String param2) {
+    public static BlankFragment2 newInstance(String param1, String param2 , String param3) {
         BlankFragment2 fragment = new BlankFragment2();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM3, param3);
         fragment.setArguments(args);
         return fragment;
     }
@@ -83,6 +86,7 @@ public class BlankFragment2 extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam3 = getArguments().getString(ARG_PARAM3);
         }
 
     }
@@ -144,6 +148,19 @@ public class BlankFragment2 extends Fragment {
                 Context context = getContext();
                 Intent intent = new Intent(context, SettingActivity.class);
                 context.startActivity(intent);
+            }
+        });
+        area = (LinearLayout)view.findViewById(R.id.area);
+        area.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                AlertDialog alertDialog1 = new AlertDialog.Builder(context)
+                        .setTitle("地区收藏")//标题
+                        .setMessage(mParam3)//内容
+                        .setIcon(R.mipmap.weather_icon)//图标
+                        .create();
+                alertDialog1.show();
             }
         });
         about = (LinearLayout) view.findViewById(R.id.user_about);

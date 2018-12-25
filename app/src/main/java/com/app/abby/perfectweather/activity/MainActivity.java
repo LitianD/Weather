@@ -35,6 +35,9 @@ import com.app.abby.perfectweather.view.fragment.HomePageFragment;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements
     String login = "";
     String username="";
     String userid="";
+    List<String> provinces = new ArrayList<>();
+    String cities = "";
 
     public void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -73,9 +78,18 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {
-            userid = bundle.getString("userid");
-            login = bundle.getString("login_msg");
-            username = bundle.getString("username");
+            if(bundle.containsKey("userid")) {
+                userid = bundle.getString("userid");
+                login = bundle.getString("login_msg");
+                username = bundle.getString("username");
+            }
+            if(bundle.containsKey("cities")){
+                provinces = bundle.getStringArrayList("cities");
+                for(int i = 0;i<provinces.size();i++){
+                    cities += provinces.get(i) + "\n";
+                    System.out.println(provinces.get(i));
+                }
+            }
         }
 
         this.update_time = (TextView)findViewById(R.id.update_time);
@@ -148,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements
                 case R.id.navigation_notifications:
                     if(login.equals("OK")){
                         header_layout.setVisibility(View.GONE);
-                        MainActivity.this.blankFragment2 = BlankFragment2.newInstance(username, "id:" + userid);
+                        MainActivity.this.blankFragment2 = BlankFragment2.newInstance(username, "id:" + userid,cities);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment2).commit();
                         fragmentId = R.id.navigation_notifications;
                         return true;
