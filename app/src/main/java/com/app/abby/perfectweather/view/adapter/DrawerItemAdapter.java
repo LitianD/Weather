@@ -16,10 +16,6 @@ import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * Created by Abby on 8/29/2017.
- */
-
 public class DrawerItemAdapter extends RecyclerView.Adapter<DrawerItemAdapter.ViewHolder> {
 
     private List<DrawerItemORM> mDraweritem;

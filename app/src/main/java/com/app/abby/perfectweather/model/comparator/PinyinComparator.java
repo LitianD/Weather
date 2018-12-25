@@ -6,10 +6,6 @@ import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.util.Comparator;
 
-/**
- * Created by Abby on 8/30/2017.
- */
-
 public class PinyinComparator implements Comparator<Object> {
 
     @Override

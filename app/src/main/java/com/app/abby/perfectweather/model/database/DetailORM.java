@@ -1,8 +1,5 @@
 package com.app.abby.perfectweather.model.database;
 
-/**
- * Created by Abby on 8/18/2017.
- */
 public class DetailORM {
 
     private int mIconRes;

@@ -127,12 +127,12 @@ public class HomePageFragment extends Fragment {
 
     private List<DetailORM> createDetail(WeatherBean weather){
         List<DetailORM> details=new ArrayList<>();
-        details.add(new DetailORM(R.drawable.ic_temp,"体感温度",weather.getHeWeather5().get(0).getNow().getFl()+"℃"));
-        details.add(new DetailORM(R.drawable.ic_shidu,"相对湿度",weather.getHeWeather5().get(0).getNow().getHum()+"%"));
-        details.add(new DetailORM(R.drawable.ic_pres,"气压",weather.getHeWeather5().get(0).getNow().getPres()+"Pa"));
-        details.add(new DetailORM(R.drawable.ic_rain,"降水量",weather.getHeWeather5().get(0).getNow().getPcpn()+"mm"));
-        details.add(new DetailORM(R.drawable.ic_wind,"风速",weather.getHeWeather5().get(0).getNow().getWind().getSpd()+"km/h"));
-        details.add(new DetailORM(R.drawable.ic_vis,"能见度",weather.getHeWeather5().get(0).getNow().getVis()+"km"));
+        details.add(new DetailORM(R.drawable.temp,"体感温度",weather.getHeWeather5().get(0).getNow().getFl()+"℃"));
+        details.add(new DetailORM(R.drawable.huim,"相对湿度",weather.getHeWeather5().get(0).getNow().getHum()+"%"));
+        details.add(new DetailORM(R.drawable.press,"气压",weather.getHeWeather5().get(0).getNow().getPres()+"Pa"));
+        details.add(new DetailORM(R.drawable.rain,"降水量",weather.getHeWeather5().get(0).getNow().getPcpn()+"mm"));
+        details.add(new DetailORM(R.drawable.wind,"风速",weather.getHeWeather5().get(0).getNow().getWind().getSpd()+"km/h"));
+        details.add(new DetailORM(R.drawable.see,"能见度",weather.getHeWeather5().get(0).getNow().getVis()+"km"));
         return details;
     }
 
@@ -152,17 +152,6 @@ public class HomePageFragment extends Fragment {
         }
         return forecasts;
     }
-
-    private List<LifeIndexOrm>createLifeIndex(WeatherBean weather){
-        List<LifeIndexOrm> lifeIndex=new ArrayList<>();
-        lifeIndex.add(new LifeIndexOrm(weather.getHeWeather5().get(0).getSuggestion().getCw().getBrf(),weather.getHeWeather5().get(0).getSuggestion().getCw().getTxt(),R.drawable.ic_car));
-        lifeIndex.add(new LifeIndexOrm(weather.getHeWeather5().get(0).getSuggestion().getSport().getBrf(),weather.getHeWeather5().get(0).getSuggestion().getSport().getTxt(),R.drawable.ic_sport));
-        lifeIndex.add(new LifeIndexOrm(weather.getHeWeather5().get(0).getSuggestion().getDrsg().getBrf(),weather.getHeWeather5().get(0).getSuggestion().getDrsg().getTxt(),R.drawable.ic_cloth));
-        lifeIndex.add(new LifeIndexOrm(weather.getHeWeather5().get(0).getSuggestion().getUv().getBrf(),weather.getHeWeather5().get(0).getSuggestion().getUv().getTxt(),R.drawable.ic_uv));
-
-        return lifeIndex;
-    }
-
 
     public void showNotificationbar(WeatherBean weather){
 

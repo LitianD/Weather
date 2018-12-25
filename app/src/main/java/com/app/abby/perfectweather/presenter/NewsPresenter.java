@@ -9,11 +9,6 @@ import com.app.abby.perfectweather.model.data.NewsBean;
 import com.app.abby.perfectweather.model.newsModel.INewsLoadListener;
 import com.app.abby.perfectweather.model.newsModel.INewsModel;
 import com.app.abby.perfectweather.model.newsModel.NewsModel;
-
-/**
- * Created by Administrator on 2018/5/19.
- */
-
 public class NewsPresenter implements INewsPresenter, INewsLoadListener{
 
     private INewsModel iNewsModel;

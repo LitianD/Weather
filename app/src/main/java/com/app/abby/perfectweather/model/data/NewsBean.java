@@ -2,10 +2,6 @@ package com.app.abby.perfectweather.model.data;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2018/5/19.
- */
-
 public class NewsBean {
     //汽车
     private List<Bean> T1348654060988;

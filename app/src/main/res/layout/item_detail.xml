@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="4dp"
-    android:layout_margin="6dp"
-    app:cardElevation="1dp">-->
-
-
-    <LinearLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -17,8 +7,20 @@
         android:background="?android:attr/selectableItemBackground"
         android:padding="14dp"
         android:gravity="center"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:alpha="1">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:id="@+id/detail_icon"
+        android:src="@drawable/ic_sunny_black_24dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,11 +31,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/temp_sense_keyword"
             android:textColor="#000000"/>
-        <!--<ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:id="@+id/detail_icon"
-            android:src="@drawable/ic_sunny_black_24dp"/>-->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,5 +40,4 @@
             android:text="@string/temp"
             android:textSize="18sp"/>
     </LinearLayout>
-<!--
-</android.support.v7.widget.CardView>-->
+</LinearLayout>

@@ -14,9 +14,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by Abby on 8/29/2017.
- */
 
 public class DBManager {
 

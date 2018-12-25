@@ -8,10 +8,6 @@ import retrofit2.http.Path;
 //import retrofit2.http.Url;
 import rx.Observable;
 
-/**
- * Created by Administrator on 2018/5/19.
- */
-
 public interface RetrofitService {
     /*
     * http://c.m.163.com/nc/article/headline/T1348647909107/0-20.html

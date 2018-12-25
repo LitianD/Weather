@@ -22,11 +22,6 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.Unbinder;
 
-
-/**
- * Created by Abby on 8/21/2017.
- */
-
 public class SettingFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener,
         Preference.OnPreferenceChangeListener{
 

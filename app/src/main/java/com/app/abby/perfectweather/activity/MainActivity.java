@@ -130,13 +130,13 @@ public class MainActivity extends AppCompatActivity implements
                     fragmentId = R.id.navigation_home;
                     return true;
                 case R.id.navigation_dashboard:
-                    header_layout.setVisibility(View.GONE);
+                    //header_layout.setVisibility(View.GONE);
                     MainActivity.this.blankFragment = BlankFragment.newInstance("", "");
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment).commit();
                     fragmentId = R.id.navigation_dashboard;
                     return true;
                 case R.id.navigation_notifications:
-                    header_layout.setVisibility(View.GONE);
+                    //header_layout.setVisibility(View.GONE);
                     MainActivity.this.blankFragment2 = BlankFragment2.newInstance("", "");
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment2).commit();
                     fragmentId = R.id.navigation_notifications;
