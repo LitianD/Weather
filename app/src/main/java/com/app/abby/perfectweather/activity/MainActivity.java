@@ -1,6 +1,5 @@
 package com.app.abby.perfectweather.activity;
 import android.Manifest;
-import android.app.Activity;
 import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,13 +31,10 @@ import com.app.abby.perfectweather.view.fragment.BlankFragment2;
 import com.app.abby.perfectweather.view.fragment.DrawerFragment;
 import com.app.abby.perfectweather.view.fragment.DrawerFragment.OnDrawerItemClick;
 import com.app.abby.perfectweather.view.fragment.HomePageFragment;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity implements
@@ -63,12 +59,22 @@ public class MainActivity extends AppCompatActivity implements
     private BlankFragment2 blankFragment2;
     private int fragmentId;
 
+
     private String cityName;
+    String login = "";
+    String username="";
+    String userid="";
 
     public void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bundle bundle = this.getIntent().getExtras();
+        if (bundle != null) {
+            userid = bundle.getString("userid");
+            login = bundle.getString("login_msg");
+            username = bundle.getString("username");
+        }
 
         this.update_time = (TextView)findViewById(R.id.update_time);
         this.temp = (TextView)findViewById(R.id.temp);
@@ -119,7 +125,9 @@ public class MainActivity extends AppCompatActivity implements
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+        TextView tv_username;
+        TextView tv_userid;
+        View view ;
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
@@ -136,29 +144,20 @@ public class MainActivity extends AppCompatActivity implements
                     fragmentId = R.id.navigation_dashboard;
                     return true;
                 case R.id.navigation_notifications:
-                    header_layout.setVisibility(View.GONE);
-                    MainActivity.this.blankFragment2 = BlankFragment2.newInstance("", "");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment2).commit();
-                    fragmentId = R.id.navigation_notifications;
-                    return true;
+                    if(login.equals("OK")){
+                        header_layout.setVisibility(View.GONE);
+                        MainActivity.this.blankFragment2 = BlankFragment2.newInstance(username, "id:" + userid);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, blankFragment2).commit();
+                        fragmentId = R.id.navigation_notifications;
+                        return true;
+                    }else{
+                        Intent i = new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(i);
+                    }
             }
             return false;
         }
 
-    };
-    private View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // 这里的是TextView的点击事件
-            LinearLayout tv = (LinearLayout) view;
-            switch (tv.getId()){
-                case R.id.user_setting:{
-                    Intent intentToMap = new Intent(MainActivity.this,SettingActivity.class);
-                    startActivity(intentToMap);
-                    break;
-                }
-            }
-        }
     };
 
     @Override
