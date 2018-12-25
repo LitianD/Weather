@@ -118,6 +118,12 @@ public class BlankFragment2 extends Fragment {
                         .setItems(items3, new DialogInterface.OnClickListener() {//添加列表
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i==0){
+                                    onClickShare();
+                                }
+                                if(i==1){
+                                    shareToQQzone();
+                                }
                                 Toast.makeText(getContext(), "点的是：" + items3[i] + i, Toast.LENGTH_SHORT).show();
                             }
                         })
