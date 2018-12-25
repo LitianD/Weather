@@ -93,16 +93,6 @@ public class BlankFragment extends Fragment implements INewsView {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_blank, container, false);
-//        List<Integer> list = new ArrayList<>();
-//        list.add(1);
-//        list.add(2);
-//        list.add(3);
-//        list.add(3);
-//        list.add(3);
-//        list.add(3);
-//        list.add(3);
-//        list.add(3);
-//        initRecycleLayout(view, list);
         presenter = new NewsPresenter(this);
         presenter.loadNews(1,0);
         return view;
@@ -143,27 +133,6 @@ public class BlankFragment extends Fragment implements INewsView {
         List<NewsBean.Bean> news = newsBean.getTop();
         initRecycleLayout(view,news);
 
-//        switch (type) {
-//            case FgNewsFragment.NEWS_TYPE_TOP:
-//                newsBeanList = newsBean.getTop();
-//                break;
-//            case FgNewsFragment.NEWS_TYPE_CAR:
-//                newsBeanList = newsBean.getNba();
-//                break;
-//            case FgNewsFragment.NEWS_TYPE_JOKES:
-//                newsBeanList = newsBean.getJoke();
-//                break;
-//            case FgNewsFragment.NEWS_TYPE_NBA:
-//                newsBeanList = newsBean.getNba();
-//                break;
-//        }
-//        Log.i("list", "showNews: " + newsBeanList.size());
-//        adapter.setData(newsBeanList);
-//        layoutManager = new LinearLayoutManager(getActivity(),
-//                LinearLayoutManager.VERTICAL, false);
-//        rv_news.setLayoutManager(layoutManager);
-//        rv_news.setAdapter(adapter);
-//        tv_news_list.setVisibility(View.GONE);
 
 
     }

@@ -34,18 +34,6 @@ public class RetrofitHelper {
     public Observable<NewsBean> getNews(String type, String id, int startPage) {
         return retrofitService.getNews(type, id, startPage);
     }
-//    public Observable<MoviesBean> getMovies(String total) {
-//        return retrofitService.getMovie(total);
-//    }
-//    public Observable<TodayBean> getToday(String category){
-//        return retrofitService.getToday(category);
-//    }
-//    public Observable<VideoUrlBean> getVideoUrl(String api){
-//        return retrofitService.getVideoUrl(api);
-//    }
-//    public Observable<WeatherBean> getWeather(int cityKey){
-//        return retrofitService.getWeather(cityKey);
-//    }
 
     public OkHttpClient getOkHttpClient() {
         if (okHttpClient==null){
