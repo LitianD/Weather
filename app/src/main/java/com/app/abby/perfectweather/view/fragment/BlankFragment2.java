@@ -16,6 +16,8 @@ import com.app.abby.perfectweather.activity.ADetailActivity;
 import com.app.abby.perfectweather.activity.MainActivity;
 import com.app.abby.perfectweather.activity.SettingActivity;
 
+import org.w3c.dom.Text;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -30,11 +32,12 @@ import butterknife.OnClick;
 public class BlankFragment2 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    @BindView(R.id.user_setting)
-    LinearLayout linearLayout;
+    private static String ARG_PARAM1 = "param1";
+    private static String ARG_PARAM2 = "param2";
+    LinearLayout setting,about;
     View view;
+    TextView tv_username;
+    TextView tv_userid;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -78,10 +81,23 @@ public class BlankFragment2 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_blank_fragment2, container, false);
+        initalView();
         //TextView textView = (TextView)view.findViewById(R.id.f2_text1);
         //textView.setText("hahha");
-        linearLayout=(LinearLayout) view.findViewById(R.id.user_setting);
-        linearLayout.setOnClickListener(new View.OnClickListener() {
+        setLisener();
+        return view;
+    }
+
+    private void initalView() {
+        tv_userid = (TextView) view.findViewById(R.id.user_id);
+        tv_username = (TextView) view.findViewById(R.id.user_name);
+        tv_username.setText(mParam1);
+        tv_userid.setText(mParam2);
+    }
+
+    private void setLisener() {
+        setting=(LinearLayout) view.findViewById(R.id.user_setting);
+        setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
@@ -89,8 +105,18 @@ public class BlankFragment2 extends Fragment {
                 context.startActivity(intent);
             }
         });
-        return view;
+        about = (LinearLayout) view.findViewById(R.id.user_about);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                Intent intent = new Intent(context, SettingActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

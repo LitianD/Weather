@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/video_background"/>
 
-
-        <Button
+            <Button
             android:id="@+id/pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:text="进   入"
+                android:layout_marginBottom="100dp"
+                android:layout_marginRight="20dp"
+            android:text="开始体验"
             android:textSize="25sp"/>
-
 
 </RelativeLayout>
