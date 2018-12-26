@@ -248,7 +248,7 @@ public class BlankFragment2 extends Fragment {
             final Bundle params = new Bundle();
             params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE,
                     QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
-            params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "切切歆语");
+            params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "完美天气");
             params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, "sss");
             params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL,
                     "http://blog.csdn.net/DickyQie/article/list/1");
