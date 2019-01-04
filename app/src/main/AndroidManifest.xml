@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.abby.perfectweather">
+    package="com.app.zlt.perfectweather">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -22,7 +22,7 @@
         android:smallScreens="true" />
 
     <application
-        android:name=".base.WeatherApplication"
+        android:name="com.app.zlt.perfectweather.base.WeatherApplication"
         android:allowBackup="true"
         android:icon="@mipmap/weather_icon"
         android:label="@string/app_name"
@@ -33,7 +33,7 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
-            android:name=".activity.BeginActivity"
+            android:name="com.app.zlt.perfectweather.activity.BeginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/LaunchTheme">
             <intent-filter>
@@ -43,17 +43,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.app.zlt.perfectweather.activity.MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.ADetailActivity" />
+        <activity android:name="com.app.zlt.perfectweather.activity.ADetailActivity" />
         <activity
-            android:name=".activity.SettingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.SelectCityActivity"
+            android:name="com.app.zlt.perfectweather.activity.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.app.zlt.perfectweather.activity.SelectCityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.app.zlt.perfectweather.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.tencent.open.yyb.AppbarActivity"
@@ -78,7 +78,7 @@
                 <!--应用的AppId要相同-->
             </intent-filter>
         </activity>
-        <service android:name=".sevices.WeatherService" />
+        <service android:name="com.app.zlt.perfectweather.sevices.WeatherService" />
 
     </application>
 
